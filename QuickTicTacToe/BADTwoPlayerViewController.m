@@ -43,8 +43,11 @@
     
     _spaceButton = [_spaceButton sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:YES]]];
     
-    _xImage = [UIImage imageNamed:@"tic-tac-toe-X.png"];
-    _oImage = [UIImage imageNamed:@"tic-tac-toe-o.jpg"];
+    NSString *xImageName = [[NSUserDefaults standardUserDefaults] valueForKey:XIMAGES];
+    NSString *oImageName = [[NSUserDefaults standardUserDefaults] valueForKey:OIMAGES];
+    
+    _xImage = [UIImage imageNamed:xImageName];//pieceX.png
+    _oImage = [UIImage imageNamed:oImageName];//pieceO.png
     
     _theGameState = [[BADGameState alloc] init];
 }
@@ -190,6 +193,17 @@
         
         [self updateGameStatus];
     }
+}
+
+- (IBAction)backBtnTUI:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)newGameTUI:(id)sender
+{
+    [self onStopPressed];
+    [self endGameWithResult:TTGameOverTie];
 }
 
 -(void)updateGameStatus

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BADGameState.h"
+#import "BADSetupSingle.h"
+#import <QuartzCore/CoreAnimation.h>
+#import "DazFireworksController.h"
+#import <iAd/ADBannerView.h>
 
 typedef enum {
     TTGameNotOver = 0,
@@ -30,7 +34,7 @@ typedef enum
     TTGameHard = 1
 }TTGameDifficulty;
 
-@interface BADSinglePlayerViewController : UIViewController<UIAlertViewDelegate>
+@interface BADSinglePlayerViewController : UIViewController<UIAlertViewDelegate, ADBannerViewDelegate>
 {
     NSTimer *stopWatchTimer; // Store the timer that fires after a certain time
     NSDate *startDate; // Stores the date of the click on the start button
@@ -38,9 +42,11 @@ typedef enum
     double decisecondO;
     TTTimerStatus timerStatus;
     BOOL firstPlayer;
+    NSString *difficulty;
+    BOOL trappedSide;
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) ADBannerView *adBanner;
 @property (weak, nonatomic) IBOutlet UILabel *playerLabel;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *spaceButton;
 @property (weak, nonatomic) IBOutlet UILabel *timerO;
@@ -52,10 +58,22 @@ typedef enum
 @property (strong, nonatomic) NSString *oPlayerName;
 @property (weak, nonatomic) IBOutlet UILabel *oPlayerLbl;
 @property (weak, nonatomic) IBOutlet UILabel *xPlayerLbl;
-@property BOOL gameIsOnEasy;
+@property (weak, nonatomic) IBOutlet UIButton *myBrandNewGame;
+@property (weak, nonatomic) IBOutlet UIButton *turnXBtn;
+@property (weak, nonatomic) IBOutlet UIButton *turnOBtn;
+@property (strong, nonatomic) BADSetupSingle *setup;
+@property CGFloat birthRate;
+@property CAEmitterLayer *fireworksEmitter;
+//@property DazFireworksController *fireWorks;
+@property BOOL animation;
+@property BOOL setupShowing;
 
 // UI Methods
 - (IBAction)spaceButtonTapped:(id)sender;
+- (IBAction)newGameTUI:(id)sender;
+- (IBAction)turnOTUI;
+- (IBAction)turnXTUI;
+- (IBAction)backBtnTUI:(id)sender;
 
 // Gameplay Methods
 -(void) initGame;

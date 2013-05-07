@@ -49,6 +49,8 @@ typedef enum
 
 // UI Methods
 - (IBAction)spaceButtonTapped:(id)sender;
+- (IBAction)backBtnTUI:(id)sender;
+- (IBAction)newGameTUI:(id)sender;
 
 // Gameplay Methods
 -(void) initGame;

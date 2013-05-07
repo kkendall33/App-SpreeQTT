@@ -53,8 +53,8 @@
     
     result = [NSString stringWithFormat:@"%@", uuidStr];
     
-    CFRelease(uuidStr);
-    CFRelease(uuid);
+    //if(uuidStr) CFRelease(uuidStr); // try uncommenting these two lines
+    //if(uuid) CFRelease(uuid);
     
     return result;
 }
@@ -173,7 +173,6 @@
     
     if([[self.theGameState.boardState objectAtIndex:spaceIndex] isEqualToString:@" "] && self.myShape == self.theGameState.playersTurn)
     {
-        
         if(self.theGameState.playersTurn == TTxPlayerTurn)
         {
             [self.theGameState.boardState replaceObjectAtIndex:spaceIndex withObject:@"x"];
@@ -196,6 +195,11 @@
     }
 }
 
+- (IBAction)backBtnTUI:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)peerPickerController:(GKPeerPickerController *)picker didConnectPeer:(NSString *)peerID toSession:(GKSession *)session
 {
     self.theSession = session;
@@ -211,8 +215,6 @@
     
     [self.theSession sendDataToAllPeers:theData withDataMode:GKSendDataReliable error:&error];
 }
-
-
 
 - (void) receiveData:(NSData *)data fromPeer:(NSString *)peer
            inSession: (GKSession *)session context:(void *)context
@@ -242,7 +244,7 @@
         
         // Received data so update the board and the game status
         [self updateBoard];
-        [self updateGameStatus];
+        [self updateGameStatus];// This is where you'll need to call the stopwatch methods
     }
 }
 

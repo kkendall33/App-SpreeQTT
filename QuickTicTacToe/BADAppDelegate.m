@@ -13,6 +13,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    
+    self.notifier = [[BADAchievementNotifier alloc] init];
+    
+    [self.notifier setNotificationsObserving];
+    
     return YES;
 }
 

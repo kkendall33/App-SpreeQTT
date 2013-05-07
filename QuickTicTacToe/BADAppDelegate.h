@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BADAchievementNotifier.h"
 
 @interface BADAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong) BADAchievementNotifier *notifier;
 
 @end

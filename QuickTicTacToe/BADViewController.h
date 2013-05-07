@@ -10,4 +10,6 @@
 
 @interface BADViewController : UIViewController
 
+- (IBAction)shareBtnTUI:(id)sender;
+
 @end
